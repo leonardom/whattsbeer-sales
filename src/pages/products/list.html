@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Produtos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items | async" (click)="itemTapped($event, item)" #slidingItem>
+      <ion-item>
+        <ion-icon [name]="item.icon" item-left></ion-icon>
+        {{item.description}}
+        <div class="item-note" item-right>
+          {{item.price | currency : 'brl' : true :'.2-2' }}
+        </div>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteTapped(item, slidingItem)"><ion-icon trash></ion-icon> Excluir</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab (click)="addTapped($event)"><ion-icon ios="ios-add" md="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

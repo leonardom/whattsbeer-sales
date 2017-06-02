@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Recebimento</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Total
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="text" 
+        style="font-size: 24px; font-weight:bold" 
+        value="{{total | currency : 'brl' : true :'.2-2' }}"
+        readonly="true">
+      </ion-input>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Pago
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="number" 
+        placeholder="0,00" 
+        style="font-size: 24px; font-weight:bold"
+        (change)="calculate($event.target.value)">
+      </ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Troco
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="number" 
+        style="font-size: 24px; font-weight:bold"
+        value="{{smallCoin | currency : 'brl' : true :'.2-2' }}"
+        readonly="true">
+      </ion-input>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block (click)="checkout()">
+    Confirmar
+  </button>
+
+</ion-content>
+
+<ion-footer no-border>
+</ion-footer>

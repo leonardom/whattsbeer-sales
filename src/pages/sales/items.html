@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Venda</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="checkout()">
+        Concluir
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of basket.items">
+      <ion-icon [name]="item.icon" item-left></ion-icon>
+      <h2>{{item.description}}</h2>
+      <p>{{item.price | currency : 'brl' : true :'.2-2' }}</p>
+      <div class="item-note" item-right>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="incTapped(item)"><ion-icon name="add" ></ion-icon></button>
+          </ion-col>
+          <ion-col align-self-center>
+            <span style="font-size: 1.5em">{{item.qty}}</span>
+          </ion-col>
+          <ion-col>
+            <button ion-button (click)="decTapped(item)"><ion-icon name="remove" ></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-buttons left *ngIf="getTotalItems() > 0">
+      <ion-title>Itens: {{getTotalItems()}}</ion-title>
+    </ion-buttons>
+    <ion-buttons right>
+      <ion-title>Total {{basket.total | currency : 'brl' : true :'.2-2' }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

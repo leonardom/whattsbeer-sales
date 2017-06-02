@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novo Produto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+    <ion-item>
+      <ion-label>Descrição</ion-label>
+      <ion-input type="text" required [(ngModel)]="item.description" ngControl="description" name="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Preço</ion-label>
+      <ion-input type="text" required [(ngModel)]="item.price" ngControl="price" name="price"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Salvar</button>
+  </form>
+</ion-content>

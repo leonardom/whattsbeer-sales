@@ -3,16 +3,67 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-card>
+    <ion-card-header>
+      Total
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-icon item-left name="cash"></ion-icon>
+        <h3>Vendas</h3>
+        <ion-note item-right>{{amountSubject | async | currency : 'brl' : true :'.2-2' }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon item-left name="beer"></ion-icon>
+        <h3>Quantidades</h3>
+        <ion-note item-right>{{qtySubject | async}}</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-card>
+    <ion-card-header>
+      Recebimentos
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Quantidades
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let item of groupedItemSubject | async">
+        <h3>{{item.description}}</h3>
+        <ion-note item-right>{{item.qty}}</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
 </ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="filter">
+      <ion-segment-button value="day">
+        Dia
+      </ion-segment-button>
+      <!--
+      <ion-segment-button value="month">
+        Mês
+      </ion-segment-button>
+      <ion-segment-button value="year">
+        Ano
+      </ion-segment-button>
+      -->
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
